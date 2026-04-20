@@ -4,11 +4,11 @@ ALearn is a sophisticated, AI-driven study ecosystem designed to transform passi
 
 ![ALearn Logo](/frontend/public/logo.png)
 
-## 🏛️ The Vision
+## The Vision
 
 In an age of information overload, ALearn provides the tools to simplify, categorize, and conquer any subject. By leveraging advanced Large Language Models, the system acts as a personal study assistant that understands context and generates pedagogical content tailored to the user.
 
-## 🔄 How It Works
+## How It Works
 
 The ALearn workflow is designed to be seamless, intuitive, and mathematically precise:
 
@@ -29,14 +29,14 @@ True mastery is tested in the **Quiz Master** module. The system generates dynam
 ### 5. Manual Refinement
 Scholars can also manually inject specific concepts into their sanctuary, allowing for a hybrid learning experience of AI-generated breadth and human-curated depth.
 
-## 🎨 Design Philosophy
+## Design Philosophy
 
 ALearn is built with a **Premium Minimalist** aesthetic:
 - **Glassmorphism**: A sleek, modern UI that uses transparency and blur to create depth.
 - **Micro-animations**: Powered by Framer Motion to provide tactile feedback on every click.
 - **Adaptive Theme**: A professional "Midnight Sanctuary" dark mode for focused late-night sessions and a "Clean Scholar" light mode for daily productivity.
 
-## 🛠️ Technological Foundations
+## Technological Foundations
 
 - **Intelligence**: Groq Llama 3.1 8B Instant.
 - **Frontend**: React 19, Tailwind CSS 4, Framer Motion.

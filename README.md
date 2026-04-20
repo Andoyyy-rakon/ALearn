@@ -1,4 +1,4 @@
-# ALearn - The Intellectual Sanctuary
+# ALearn
 
 ALearn is a sophisticated, AI-driven study ecosystem designed to transform passive reading into active mastery. It serves as a personal sanctuary for scholars who want to distill complex topics into structured, interactive learning materials.
 

@@ -168,8 +168,8 @@ const Home = () => {
           >
             {[
               { 
-                title: "PDF to Flashcards", 
-                desc: "Upload any document and let our AI distill it into high-impact study cards.",
+                title: "AI & Manual Flashcards", 
+                desc: "Create flashcards manually or let our AI generate them from documents instantly.",
                 icon: <FileText className="w-8 h-8 text-primary-indigo" />,
                 color: "bg-primary-indigo/5"
               },
@@ -389,7 +389,6 @@ const Home = () => {
                 <h5 className="font-bold mb-6 uppercase tracking-widest text-xs opacity-40">Product</h5>
                 <ul className="space-y-4 text-on-surface/60 font-bold">
                   <li><a href="#features" className="hover:text-primary-indigo transition">Features</a></li>
-                  <li><a href="#preview" className="hover:text-primary-indigo transition">Preview</a></li>
                 </ul>
               </div>
               <div>

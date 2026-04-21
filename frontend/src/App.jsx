@@ -7,16 +7,21 @@ import AIGenerator from './pages/AIGenerator';
 import Quiz from './pages/Quiz';
 import Selection from './pages/Selection';
 import ProtectedRoute from './components/ProtectedRoute';
+import LoadingOverlay from './components/LoadingOverlay';
+import { useAuth } from './context/AuthContext';
 
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from './contexts/ThemeContext';
 
 function App() {
+  const { isLoading } = useAuth();
+  
   return (
     <ThemeProvider>
       <BrowserRouter>
         <div className="min-h-screen bg-surface font-sans transition-colors duration-200 overflow-x-hidden relative">
           <Toaster position="top-center" reverseOrder={false} />
+          {isLoading && <LoadingOverlay />}
         <Navbar />
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12">
           <Routes>

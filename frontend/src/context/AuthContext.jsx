@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 import api from '../services/api';
+import { toast } from 'react-hot-toast';
 
 const AuthContext = createContext();
 
@@ -8,6 +9,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('study_user');
@@ -18,6 +20,7 @@ export const AuthProvider = ({ children }) => {
 
   const loginGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
+      setIsLoading(true);
       try {
         const userInfo = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
           headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
@@ -40,6 +43,8 @@ export const AuthProvider = ({ children }) => {
       } catch (err) {
         console.error("Login failed:", err);
         toast.error("Authentication failed. Please check your connection.");
+      } finally {
+        setIsLoading(false);
       }
     },
   });
@@ -51,7 +56,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login: loginGoogle, logout }}>
+    <AuthContext.Provider value={{ user, isLoading, login: loginGoogle, logout }}>
       {children}
     </AuthContext.Provider>
   );

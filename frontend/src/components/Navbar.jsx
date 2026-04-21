@@ -109,7 +109,6 @@ const Navbar = () => {
                   <>
                     <div className="hidden sm:flex items-center space-x-6 mr-4 text-sm font-bold text-on-surface/60 uppercase tracking-widest">
                       <a href="#features" className="hover:text-primary-indigo transition">Features</a>
-                      <a href="#preview" className="hover:text-primary-indigo transition">Preview</a>
                       <a href="#about" className="hover:text-primary-indigo transition">About</a>
                     </div>
                     <button 

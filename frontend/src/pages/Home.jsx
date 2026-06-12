@@ -259,15 +259,16 @@ const Home = () => {
                 ))}
               </div>
             </motion.div>
-            
+           
             <motion.div 
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={smoothTransition}
               className="glass-card p-8 sm:p-10 rounded-2xl ambient-shadow border border-white/5"
+              id='contact'
             >
-              <h3 className="text-2xl font-bold mb-6 text-on-surface">Leave a Message</h3>
+              <h3  className="text-2xl font-bold mb-6 text-on-surface">Leave a Message</h3>
               <form ref={formRef} onSubmit={sendEmail} className="space-y-5">
                 <div>
                   <label className="block text-xs font-bold opacity-40 uppercase tracking-widest mb-2">Your Name</label>
@@ -395,7 +396,7 @@ const Home = () => {
                 <h5 className="font-bold mb-6 uppercase tracking-widest text-xs opacity-40">Support</h5>
                 <ul className="space-y-4 text-on-surface/60 font-bold">
                   <li><a href="#about" className="hover:text-primary-indigo transition">Mission</a></li>
-                  <li><a href="#about" className="hover:text-primary-indigo transition">Contact</a></li>
+                  <li><a href="#contact" className="hover:text-primary-indigo transition">Contact</a></li>
                 </ul>
               </div>
             </div>

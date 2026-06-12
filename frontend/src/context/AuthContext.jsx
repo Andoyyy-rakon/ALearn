@@ -22,24 +22,20 @@ export const AuthProvider = ({ children }) => {
     onSuccess: async (tokenResponse) => {
       setIsLoading(true);
       try {
-        const userInfo = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-        }).then(res => res.json());
-        
         const backendRes = await api.post('/auth/google', {
             idToken: tokenResponse.access_token
         });
         
         const userData = {
-            id: backendRes.data.id || userInfo.sub,
-            name: userInfo.name,
-            email: userInfo.email,
-            avatar: userInfo.picture,
+            id: backendRes.data.id,
+            name: backendRes.data.name,
+            email: backendRes.data.email,
+            avatar: backendRes.data.avatar,
             token: backendRes.data.token
         };
         setUser(userData);
         localStorage.setItem('study_user', JSON.stringify(userData));
-        toast.success(`Welcome back, ${userInfo.name}! ready to master some subjects?`);
+        toast.success(`Welcome back, ${userData.name}! ready to master some subjects?`);
       } catch (err) {
         console.error("Login failed:", err);
         toast.error("Authentication failed. Please check your connection.");

@@ -2,7 +2,7 @@
 
 ALearn is a sophisticated, AI-driven study ecosystem designed to transform passive reading into active mastery. It serves as a personal sanctuary for scholars who want to distill complex topics into structured, interactive learning materials.
 
-![ALearn Logo](/frontend/public/logo.png)
+![ALearn Logo](/frontend/public/ALtool.png)
 
 ## The Vision
 
@@ -38,10 +38,9 @@ ALearn is built with a **Premium Minimalist** aesthetic:
 
 ## Technological Foundations
 
-- **Intelligence**: Groq Llama 3.1 8B Instant.
+- **Intelligence**: Gemini & Groq Llama 3.1 8B Instant.
 - **Frontend**: React 19, Tailwind CSS 4, Framer Motion.
-- **Backend**: Node.js & Express Architecture.
+- **Backend**: Node.js & Express.js.
 - **Data Layers**: MongoDB & Mongoose.
 
----
-*ALearn is a private, curated project focusing on the intersection of AI and Pedagogy.*
+

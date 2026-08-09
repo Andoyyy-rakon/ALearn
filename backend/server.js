@@ -24,6 +24,10 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/flashcards', flashcardRoutes);
 app.use('/api/ai', aiRoutes);
 
+app.get('/', (req, res) => {
+  res.send('API is running...');
+});
+
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;

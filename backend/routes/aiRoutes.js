@@ -8,7 +8,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 router.post('/topic', generateFromTopic);
-
+router.post('/pdf', upload.single('pdf'), generateFromPDF);
 router.post('/explain', explainAnswer);
 router.post('/quiz', generateQuiz);
 

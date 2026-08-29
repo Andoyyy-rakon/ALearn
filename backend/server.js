@@ -24,6 +24,10 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/flashcards', flashcardRoutes);
 app.use('/api/ai', aiRoutes);
 
+app.get('/ping', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
 app.get('/', (req, res) => {
   res.send('API is running...');
 });

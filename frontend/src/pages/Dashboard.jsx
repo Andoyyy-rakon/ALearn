@@ -40,37 +40,39 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="flex h-64 items-center justify-center">
-        <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
+        <Loader2 className="w-8 h-8 text-brass animate-spin" />
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="bg-red-50 p-4 rounded-md border border-red-200">
-        <p className="text-red-700">{error}</p>
+      <div className="wrap pt-8">
+        <div className="card-panel p-4 border-rust/30">
+          <p className="text-rust">{error}</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div>
-      <div className="mb-8 flex items-center justify-between">
+    <div className="wrap pt-8 pb-16">
+      <div className="mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">Your Study Deck</h1>
-          <p className="mt-2 text-slate-600">Review your existing flashcards and track progress.</p>
+          <h1 className="font-serif text-3xl text-text">Your Study Deck</h1>
+          <p className="mt-2 text-muted text-[15px]">Review your existing flashcards and track progress.</p>
         </div>
-        <div className="bg-white px-4 py-2 rounded-lg border border-slate-200 shadow-sm flex items-center gap-2">
-          <Layers className="text-blue-500 w-5 h-5" />
-          <span className="font-semibold text-slate-800">{flashcards.length} Total</span>
+        <div className="card-panel px-4 py-2 flex items-center gap-2">
+          <Layers className="text-brass w-5 h-5" />
+          <span className="font-semibold text-text text-[14px]">{flashcards.length} Total</span>
         </div>
       </div>
 
       {flashcards.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-xl border border-dashed border-slate-300">
-          <Layers className="mx-auto h-12 w-12 text-slate-300" />
-          <h3 className="mt-4 text-lg font-medium text-slate-900">No flashcards yet</h3>
-          <p className="mt-2 text-slate-500 max-w-sm mx-auto">Get started by creating some manual flashcards or using the AI generator.</p>
+        <div className="text-center py-16 card-panel border-dashed">
+          <Layers className="mx-auto h-12 w-12 text-muted/30" />
+          <h3 className="mt-4 font-serif text-lg text-text">No flashcards yet</h3>
+          <p className="mt-2 text-muted text-[14px] max-w-sm mx-auto">Get started by creating some manual flashcards or using the AI generator.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

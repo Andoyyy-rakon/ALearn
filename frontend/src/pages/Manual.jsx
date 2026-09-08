@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
-import { CheckCircle2, Loader2, Save } from 'lucide-react';
+import { Loader2, Save } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 const Manual = () => {
@@ -39,19 +39,16 @@ const Manual = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-2xl mx-auto pt-8 sm:pt-10 pb-16 px-4 sm:px-6">
       <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold text-slate-900">Create Flashcard</h1>
-        <p className="mt-2 text-slate-600">Manually add a specific question and answer to your deck.</p>
+        <h1 className="font-serif text-3xl text-text">Create Flashcard</h1>
+        <p className="mt-2 text-muted text-[15px]">Manually add a specific question and answer to your deck.</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-white shadow-sm border border-slate-200 rounded-xl overflow-hidden">
+      <form onSubmit={handleSubmit} className="card-panel overflow-hidden">
         <div className="p-6 md:p-8 space-y-6">
-          
-          {/* Removed Topic and Difficulty inputs for streamlined UI */}
-
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Question (Front)</label>
+            <label className="block text-[12.5px] text-muted mb-2">Question (Front)</label>
             <textarea
               name="question"
               required
@@ -59,12 +56,12 @@ const Manual = () => {
               value={formData.question}
               onChange={handleChange}
               placeholder="What is the use of useEffect?"
-              className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+              className="field-underline"
             ></textarea>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Answer (Back)</label>
+            <label className="block text-[12.5px] text-muted mb-2">Answer (Back)</label>
             <textarea
               name="answer"
               required
@@ -72,16 +69,16 @@ const Manual = () => {
               value={formData.answer}
               onChange={handleChange}
               placeholder="Allows you to perform side effects in function components..."
-              className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+              className="field-underline"
             ></textarea>
           </div>
         </div>
 
-        <div className="bg-slate-50 px-6 py-4 flex items-center justify-end border-t border-slate-200">
+        <div className="bg-white/3 px-6 py-4 flex items-center justify-end border-t border-line">
           <button
             type="submit"
             disabled={loading}
-            className="flex items-center px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 disabled:opacity-70 transition-colors"
+            className="btn-brass text-[14px] px-6 py-2.5"
           >
             {loading ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : <Save className="w-5 h-5 mr-2" />}
             {loading ? 'Saving...' : 'Save Flashcard'}

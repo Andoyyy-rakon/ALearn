@@ -7,38 +7,18 @@ const LoadingOverlay = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-surface/80 backdrop-blur-xl"
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-ink/60 backdrop-blur-md"
     >
-      <div className="relative flex items-center justify-center">
-        {/* Outer glowing ring */}
-        <motion.div 
-          animate={{ rotate: 360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          className="absolute w-24 h-24 rounded-full border-t-2 border-primary-indigo border-opacity-50 blur-[2px]"
-        />
-        
-        {/* Main spinning ring */}
-        <motion.div 
-          animate={{ rotate: -360 }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-          className="w-20 h-20 rounded-full border-4 border-transparent border-t-primary-indigo border-r-secondary-violet mesh-gradient-border shadow-[0_0_15px_rgba(114,74,167,0.5)]"
-        />
-
-        {/* Center element */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-8 h-8 rounded-full mesh-gradient shadow-lg animate-pulse" />
+      <div className="card-panel p-8 flex flex-col items-center max-w-sm w-full mx-4 text-center ambient-shadow">
+        {/* Brass spinner */}
+        <div className="relative w-10 h-10 mb-5">
+          <div className="w-10 h-10 rounded-full border-2 border-line" />
+          <div className="absolute top-0 left-0 w-10 h-10 rounded-full border-2 border-brass border-t-transparent animate-spin" />
         </div>
+
+        <h3 className="font-serif text-base font-medium text-text mb-1">Authenticating</h3>
+        <p className="text-[13px] text-muted">Connecting your Google session...</p>
       </div>
-      
-      <motion.div 
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-        className="mt-8 text-center"
-      >
-        <h3 className="text-xl font-bold text-on-surface mb-2">Authenticating</h3>
-        <p className="text-sm text-on-surface/60 animate-pulse">Setting up your study space...</p>
-      </motion.div>
     </motion.div>
   );
 };

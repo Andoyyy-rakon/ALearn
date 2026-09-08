@@ -1,94 +1,169 @@
 @import "tailwindcss";
-@custom-variant dark (&:where(.dark, .dark *));
+
+/* ──────────────────────────────────────
+   ALearn — Editorial Dark Design System
+   Fonts: Fraunces (serif) + IBM Plex Sans
+   Palette: ink / panel / paper / brass / sage / rust
+   ────────────────────────────────────── */
 
 @theme {
-  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  
-  /* Surface Hierarchy */
-  --color-surface: #f8f9ff;
-  --color-surface-container-low: #f2f3f9;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-highest: #e1e2e8;
-  
-  /* Primary Palette */
-  --color-primary-indigo: #333697;
-  --color-secondary-violet: #724aa7;
-  --color-accent-highlight: #c59afe;
-  --color-on-surface: #191c20;
-  --color-outline-ghost: rgba(197, 197, 212, 0.2);
+  /* ── Typography ── */
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Fraunces', ui-serif, Georgia, serif;
 
-  /* Radii */
-  --radius-xl: 3rem;
-  --radius-lg: 2rem;
+  /* ── Core Dark Surfaces ── */
+  --color-ink: #14171F;
+  --color-panel: #1B1F29;
+  --color-surface: #14171F;
+  --color-on-surface: #E9E5D8;
 
-  /* Easing */
-  --ease-oasis: cubic-bezier(0.4, 0, 0.2, 1);
-}
+  /* ── Paper (light card surfaces) ── */
+  --color-paper: #F3ECDD;
+  --color-paper-ink: #232019;
 
-:root.dark {
-  color-scheme: dark;
-  --color-surface: #020617;
-  --color-surface-container-low: #0f172a;
-  --color-surface-container-lowest: #020617;
-  --color-surface-container-highest: #1e293b;
-  
-  --color-primary-indigo: #818cf8;
-  --color-secondary-violet: #a78bfa;
-  --color-accent-highlight: #c084fc;
-  
-  --color-on-surface: #f8fafc;
-  --color-outline-ghost: rgba(255, 255, 255, 0.1);
+  /* ── Text Hierarchy ── */
+  --color-text: #E9E5D8;
+  --color-muted: #9199A6;
+
+  /* ── Accent Colors ── */
+  --color-brass: #C9A24B;
+  --color-brass-soft: rgba(201, 162, 75, 0.16);
+  --color-brass-hover: #D8B15F;
+  --color-sage: #6FA287;
+  --color-rust: #B6603A;
+
+  /* ── Borders & Lines ── */
+  --color-line: rgba(233, 229, 216, 0.12);
+  --color-line-paper: rgba(35, 32, 25, 0.14);
+
+  /* ── Radii ── */
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+
+  /* ── Easing ── */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @layer base {
   body {
-    @apply bg-surface text-on-surface antialiased;
+    background-color: var(--color-ink);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
+    letter-spacing: -0.01em;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(233, 229, 216, 0.05) 1px, transparent 0);
+    background-size: 26px 26px;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+  }
+
+  /* Global Cursor Pointer Rules */
+  button, 
+  a, 
+  [role="button"], 
+  input[type="button"], 
+  input[type="submit"], 
+  input[type="reset"], 
+  input[type="radio"], 
+  input[type="checkbox"],
+  label[for],
+  select {
+    cursor: pointer;
+  }
+
+  /* Clean Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(233, 229, 216, 0.15);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(233, 229, 216, 0.25);
+  }
+
+  ::selection {
+    background: rgba(201, 162, 75, 0.25);
+    color: var(--color-text);
   }
 }
 
 @layer utilities {
-  .dark .bg-white {
-    background-color: var(--color-surface-container-low) !important;
-  }
-  .dark .text-slate-900,
-  .dark .text-slate-800,
-  .dark .text-slate-700 {
-    color: var(--color-on-surface) !important;
-  }
-  .dark .text-slate-600,
-  .dark .text-slate-500 {
-    color: rgba(255, 255, 255, 0.6) !important;
-  }
-  .dark .border-slate-200,
-  .dark .border-slate-300 {
-    border-color: rgba(255, 255, 255, 0.1) !important;
-  }
-  .dark .bg-slate-50 {
-    background-color: rgba(255, 255, 255, 0.03) !important;
+  /* ── Card Styles ── */
+  .card-panel {
+    background-color: var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
   }
 
-  .mesh-gradient {
-    background: linear-gradient(45deg, var(--color-primary-indigo), var(--color-secondary-violet));
-  }
-  
-  .mesh-gradient-text {
-    background: linear-gradient(45deg, var(--color-primary-indigo), var(--color-secondary-violet));
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    display: inline-block;
-  }
-  
-  .glass-card {
-    @apply bg-white/40 dark:bg-slate-900/60 backdrop-blur-[24px] transition-all duration-500 ease-oasis border border-white/20 dark:border-white/10;
+  .card-paper {
+    background-color: var(--color-paper);
+    color: var(--color-paper-ink);
+    border-radius: 2px;
+    box-shadow: 0 24px 50px -20px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(0, 0, 0, 0.04);
   }
 
+  /* ── Buttons ── */
+  .btn-brass {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-brass);
+    color: #1B1608;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 9px 20px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-brass);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+  }
+  .btn-brass:hover {
+    background-color: var(--color-brass-hover);
+  }
+  .btn-brass:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* ── Layout ── */
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  /* ── Borders ── */
+  .border-line {
+    border-color: var(--color-line);
+  }
+
+  .border-line-paper {
+    border-color: var(--color-line-paper);
+  }
+
+  /* ── Ambient Shadow ── */
   .ambient-shadow {
-    box-shadow: 0 30px 60px -5px rgba(25, 28, 32, 0.06);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
   }
 
+  /* ── 3D Flashcard Utilities ── */
   .perspective-1000 {
     perspective: 1000px;
   }
@@ -109,5 +184,42 @@
 
   .rotate-y-180 {
     transform: rotateY(180deg);
+  }
+
+  /* ── Form Field (underline style) ── */
+  .field-underline {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--color-line);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 14.5px;
+    padding: 8px 2px;
+    outline: none;
+    resize: none;
+    transition: border-color 0.15s ease;
+  }
+  .field-underline::placeholder {
+    color: #5c6270;
+  }
+  .field-underline:focus {
+    border-bottom-color: var(--color-brass);
+  }
+
+  /* ── Dot Indicators ── */
+  .dot-mastered {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-sage);
+    display: inline-block;
+  }
+  .dot-review {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-rust);
+    display: inline-block;
   }
 }

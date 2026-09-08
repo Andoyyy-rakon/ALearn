@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import api from '../services/api';
-import { BrainCircuit, Loader2, PlayCircle, CheckCircle2, XCircle } from 'lucide-react';
+import { Brain, Loader2, PlayCircle, CheckCircle2, XCircle } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 const Quiz = () => {
@@ -23,7 +23,7 @@ const Quiz = () => {
 
   useEffect(() => {
     if (location.state?.quizData) {
-      setTopic(location.state.topic || 'PDF Document');
+      setTopic(location.state.topic || 'Study Topic');
       
       let data = location.state.quizData;
       if (data && !Array.isArray(data) && Array.isArray(data.items)) {
@@ -113,17 +113,18 @@ const Quiz = () => {
     }
   };
 
+  // ═══ QUIZ COMPLETE ═══
   if (quizComplete) {
     return (
-      <div className="max-w-2xl mx-auto text-center py-12">
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-10">
-          <BrainCircuit className="w-20 h-20 text-blue-500 mx-auto mb-6" />
-          <h2 className="text-3xl font-bold text-slate-900 mb-4">Quiz Complete!</h2>
-          <div className="text-6xl font-extrabold text-blue-600 mb-6">
-            {score} <span className="text-3xl text-slate-400">/ {quizData.length}</span>
+      <div className="max-w-2xl mx-auto text-center py-12 px-4">
+        <div className="card-panel p-10 ambient-shadow">
+          <Brain className="w-20 h-20 text-brass mx-auto mb-6" />
+          <h2 className="font-serif text-3xl text-text mb-4">Quiz Complete!</h2>
+          <div className="text-6xl font-serif font-medium text-brass mb-6">
+            {score} <span className="text-3xl text-muted">/ {quizData.length}</span>
           </div>
-          <p className="text-lg text-slate-600 mb-8">
-            You were quizzed on <span className="font-semibold text-slate-800">{topic}</span>.
+          <p className="text-[16px] text-muted mb-8">
+            You were quizzed on <span className="font-semibold text-text">{topic}</span>.
           </p>
           <button 
             onClick={() => {
@@ -133,7 +134,7 @@ const Quiz = () => {
               setCurrentQuestionIndex(0);
               resetQuestionState();
             }}
-            className="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"
+            className="btn-brass"
           >
             Take Another Quiz
           </button>
@@ -142,18 +143,19 @@ const Quiz = () => {
     );
   }
 
+  // ═══ ACTIVE QUIZ ═══
   if (quizData) {
     if (quizData.length === 0) {
       return (
-        <div className="max-w-xl mx-auto pt-10 text-center">
-          <BrainCircuit className="w-16 h-16 text-red-500 dark:text-red-400 mx-auto mb-6" />
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Quiz Generation Error</h2>
-          <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-md">
+        <div className="max-w-xl mx-auto pt-10 text-center px-4">
+          <Brain className="w-16 h-16 text-rust mx-auto mb-6" />
+          <h2 className="font-serif text-2xl text-text mb-4">Quiz Generation Error</h2>
+          <div className="mb-6 p-4 bg-rust/10 text-rust border border-rust/20 rounded-[3px]">
             Our AI couldn't generate a quiz for this topic. It might be too vague or unsupported.
           </div>
           <button 
             onClick={() => setQuizData(null)} 
-            className="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"
+            className="btn-brass"
           >
             Try Again
           </button>
@@ -165,13 +167,13 @@ const Quiz = () => {
     
     if (!currentQuestion) {
       return (
-        <div className="max-w-xl mx-auto pt-10 text-center">
-          <BrainCircuit className="w-16 h-16 text-yellow-500 mx-auto mb-6" />
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Question Not Found</h2>
-          <p className="text-slate-600 mb-6">We couldn't load this specific question. It might be missing formatted data.</p>
+        <div className="max-w-xl mx-auto pt-10 text-center px-4">
+          <Brain className="w-16 h-16 text-brass mx-auto mb-6" />
+          <h2 className="font-serif text-2xl text-text mb-4">Question Not Found</h2>
+          <p className="text-muted mb-6">We couldn't load this specific question. It might be missing formatted data.</p>
           <button 
             onClick={() => setQuizData(null)} 
-            className="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"
+            className="btn-brass"
           >
             Go Back
           </button>
@@ -196,40 +198,38 @@ const Quiz = () => {
     }
     const correctAns = currentQuestion.correctAnswer || currentQuestion.correct_answer || currentQuestion.answer;
 
-    const isCorrect = isAnswered && selectedAnswer === correctAns;
-
     return (
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto px-4 pt-4 pb-16">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-200">Quiz: {topic}</h2>
-          <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 rounded-full font-medium text-sm">
+          <h2 className="font-serif text-xl text-text">Quiz: {topic}</h2>
+          <span className="px-3 py-1 card-panel text-brass font-medium text-sm">
             Question {currentQuestionIndex + 1} of {quizData.length}
           </span>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+        <div className="card-panel overflow-hidden ambient-shadow">
           <div className="p-8">
-            <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-8 leading-tight">
+            <h3 className="font-serif text-2xl text-text mb-8 leading-tight">
               {currentQuestion.question || "Unknown Question"}
             </h3>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {choicesList.map((choice, idx) => {
-                let buttonClass = "w-full text-left px-6 py-4 rounded-xl border-2 transition-all font-medium text-lg ";
+                let buttonClass = "w-full text-left px-6 py-4 rounded-[3px] border transition-all font-medium text-[15px] ";
                 
                 if (!isAnswered) {
                   if (selectedAnswer === choice) {
-                    buttonClass += "border-blue-500 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300";
+                    buttonClass += "border-brass bg-brass-soft text-brass";
                   } else {
-                    buttonClass += "border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300";
+                    buttonClass += "border-line hover:border-brass/40 hover:bg-white/3 text-text/80";
                   }
                 } else {
                   if (choice === correctAns) {
-                    buttonClass += "border-green-500 bg-green-50 dark:bg-green-900/30 text-green-800 dark:text-green-300";
+                    buttonClass += "border-sage bg-sage/10 text-sage";
                   } else if (choice === selectedAnswer) {
-                    buttonClass += "border-red-500 bg-red-50 dark:bg-red-900/30 text-red-800 dark:text-red-300";
+                    buttonClass += "border-rust bg-rust/10 text-rust";
                   } else {
-                    buttonClass += "border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-600 opacity-50";
+                    buttonClass += "border-line text-muted/50 opacity-50";
                   }
                 }
 
@@ -242,8 +242,8 @@ const Quiz = () => {
                   >
                     <div className="flex items-center justify-between">
                       <span>{choice}</span>
-                      {isAnswered && choice === correctAns && <CheckCircle2 className="w-6 h-6 text-green-500" />}
-                      {isAnswered && choice === selectedAnswer && choice !== correctAns && <XCircle className="w-6 h-6 text-red-500" />}
+                      {isAnswered && choice === correctAns && <CheckCircle2 className="w-5 h-5 text-sage" />}
+                      {isAnswered && choice === selectedAnswer && choice !== correctAns && <XCircle className="w-5 h-5 text-rust" />}
                     </div>
                   </button>
                 );
@@ -251,18 +251,18 @@ const Quiz = () => {
             </div>
           </div>
 
-          <div className="bg-slate-50 border-t border-slate-200 p-6 flex flex-col items-center">
+          <div className="bg-white/3 border-t border-line p-6 flex flex-col items-center">
             {isAnswered && explanation && !loadingExplanation && (
-              <div className="w-full mb-6 p-4 bg-orange-50 dark:bg-orange-900/30 border border-orange-200 dark:border-orange-800 rounded-lg">
-                <h4 className="flex items-center text-orange-800 dark:text-orange-300 font-semibold mb-2">
-                  <BrainCircuit className="w-5 h-5 mr-2" /> AI Explanation
+              <div className="w-full mb-6 p-4 bg-brass-soft border border-brass/20 rounded-[3px]">
+                <h4 className="flex items-center text-brass font-semibold mb-2 text-[14px]">
+                  <Brain className="w-4 h-4 mr-2" /> AI Explanation
                 </h4>
-                <p className="text-orange-900 dark:text-orange-200 text-sm leading-relaxed">{explanation}</p>
+                <p className="text-text/80 text-[13px] leading-relaxed">{explanation}</p>
               </div>
             )}
             
             {loadingExplanation && (
-              <div className="w-full mb-6 py-4 flex justify-center text-slate-500">
+              <div className="w-full mb-6 py-4 flex justify-center text-muted text-[14px]">
                 <Loader2 className="w-5 h-5 animate-spin mr-2" /> Generating explanation...
               </div>
             )}
@@ -271,14 +271,14 @@ const Quiz = () => {
               <button
                 onClick={submitAnswer}
                 disabled={selectedAnswer === null || selectedAnswer === undefined}
-                className="w-full sm:w-auto px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 transition"
+                className="w-full sm:w-auto btn-brass"
               >
                 Submit Answer
               </button>
             ) : (
               <button
                 onClick={nextQuestion}
-                className="w-full sm:w-auto px-8 py-3 bg-slate-800 text-white rounded-lg font-medium hover:bg-slate-900 transition flex items-center justify-center"
+                className="w-full sm:w-auto px-8 py-3 bg-white/5 text-text rounded-[3px] font-semibold text-[15px] hover:bg-white/8 transition-colors flex items-center justify-center border border-line"
               >
                 {currentQuestionIndex + 1 < quizData.length ? 'Next Question' : 'View Results'}
               </button>
@@ -289,34 +289,35 @@ const Quiz = () => {
     );
   }
 
+  // ═══ START FORM ═══
   return (
-    <div className="max-w-xl mx-auto pt-10 text-center px-4">
+    <div className="max-w-xl mx-auto pt-8 pb-16 px-4 sm:px-6 text-center">
       <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-6">
-        <BrainCircuit className="w-10 h-10 sm:w-12 sm:h-12 text-primary-indigo dark:text-indigo-400" />
-        <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-on-surface">AI Quiz Mode</h1>
+  
+        <h1 className="font-serif text-3xl sm:text-4xl text-text">Quiz Generator</h1>
       </div>
-      <p className="text-slate-600 dark:text-on-surface/60 mb-8 max-w-md mx-auto">Test your knowledge. Our AI will generate a dynamic multiple choice test on any subject.</p>
+      <p className="text-muted text-[15px] mb-8 max-w-md mx-auto">Test your knowledge with a dynamic multiple choice evaluation.</p>
       
-      {error && <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-md">{error}</div>}
+      {error && <div className="mb-6 p-4 bg-rust/10 text-rust border border-rust/20 rounded-[3px]">{error}</div>}
 
-      <form onSubmit={startQuiz} className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-8">
-        <label className="block text-left text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">What do you want to be tested on?</label>
+      <form onSubmit={startQuiz} className="card-panel p-8 text-left ambient-shadow">
+        <label className="block text-[12.5px] text-muted mb-2">What do you want to be tested on?</label>
         <input
           type="text"
           required
           placeholder="e.g. Philippine History, Math, Science..."
-          className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg shadow-sm mb-6"
+          className="w-full px-4 py-3 bg-white/3 border border-line rounded-[3px] text-text text-[15px] focus:border-brass focus:outline-none transition-colors placeholder:text-muted/50 mb-6"
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
         />
 
-        <label className="block text-left text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Number of Questions (1-20)</label>
+        <label className="block text-[12.5px] text-muted mb-2">Number of Questions (1-20)</label>
         <input
           type="number"
           min="1"
           max="20"
           required
-          className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg shadow-sm mb-8"
+          className="w-full px-4 py-3 bg-white/3 border border-line rounded-[3px] text-text text-[15px] focus:border-brass focus:outline-none transition-colors mb-8"
           value={questionCount}
           onChange={(e) => {
             const val = e.target.value;
@@ -327,9 +328,9 @@ const Quiz = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none disabled:opacity-70 transition-all"
+          className="w-full btn-brass text-[15px]"
         >
-          {loading ? <Loader2 className="animate-spin w-6 h-6 mr-3" /> : <PlayCircle className="w-6 h-6 mr-3" />}
+          {loading ? <Loader2 className="animate-spin w-5 h-5 mr-2" /> : <PlayCircle className="w-5 h-5 mr-2" />}
           {loading ? 'Generating Quiz...' : 'Start Quiz'}
         </button>
       </form>

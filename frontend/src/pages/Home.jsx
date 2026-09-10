@@ -24,46 +24,48 @@ import { toast } from 'react-hot-toast';
 const HERO_DECK = [
   {
     id: 1,
-    topic: "Cognitive Neuroscience",
+    topic: "Astronomy",
     difficulty: "Easy",
     difficultyDot: "dot-mastered",
     difficultyLabel: "text-sage",
-    question: "What is the primary role of the hippocampus in human memory formation?",
-    answer: "It consolidates new experiences into long-term memory and helps encode spatial and contextual detail before that information is stored more broadly across the cortex.",
-    deckName: "Study Deck"
+    question: "Who was the first person to walk on the Moon?",
+    answer: "Neil Armstrong",
+    deckName: "Astronomy Deck"
   },
+
   {
     id: 2,
-    topic: "Quantum Physics",
+    topic: "Astronomy",
     difficulty: "Medium",
     difficultyDot: "bg-brass",
     difficultyLabel: "text-brass",
-    question: "What does Heisenberg's Uncertainty Principle fundamentally state?",
-    answer: "It asserts that one cannot simultaneously determine with arbitrary precision both the exact position and linear momentum of a quantum particle.",
-    deckName: "Physics Deck"
+    question: "What is the closest planet to the Sun?",
+    answer: "Mercury",
+    deckName: "Astronomy Deck"
   },
+
   {
     id: 3,
-    topic: "Organic Chemistry",
+    topic: "Astronomy",
     difficulty: "Hard",
     difficultyDot: "dot-review",
     difficultyLabel: "text-rust",
-    question: "What defines an electrophilic addition reaction in alkenes?",
-    answer: "An electron-deficient species (electrophile) attacks the double bond carbon-carbon pi electrons, breaking the pi bond to form two new sigma bonds.",
-    deckName: "Chemistry Deck"
+    question: "What was the first artificial satellite?",
+    answer: "Sputnik 1",
+    deckName: "Astronomy Deck"
   },
+
   {
     id: 4,
-    topic: "Macroeconomics",
+    topic: "Astronomy",
     difficulty: "Medium",
     difficultyDot: "bg-brass",
     difficultyLabel: "text-brass",
-    question: "What is the Fisher Effect in monetary theory?",
-    answer: "It describes the one-for-one relationship between the expected inflation rate and nominal interest rates, keeping the real interest rate constant in equilibrium.",
-    deckName: "Economics Deck"
+    question: "What galaxy contains our Solar System?",
+    answer: "Milky Way",
+    deckName: "Astronomy Deck"
   }
 ];
-
 const Home = () => {
   const { user, login } = useAuth();
   const navigate = useNavigate();
@@ -402,92 +404,142 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ═══════════ OUR MISSION ═══════════ */}
-      <section id="about" className="py-20 lg:py-28 scroll-mt-16">
+      {/* ═══════════ OUR PURPOSE (EDITORIAL RECOMPOSED) ═══════════ */}
+      <section id="about" className="py-28 lg:py-40 scroll-mt-16 border-t border-line/40">
         <div className="wrap">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          {/* Header Story */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={smoothTransition}
+            className="max-w-4xl"
+          >
+            <span className="text-[11px] uppercase tracking-[0.25em] text-brass font-medium block mb-6">
+              Our Purpose
+            </span>
             
-            {/* Mission Copy */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={smoothTransition}
-              className="lg:col-span-6 space-y-6"
-            >
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-[3px] bg-white/5 text-[12px] font-semibold text-muted border border-line">
-                <span>Our Purpose</span>
-              </div>
-              <h2 className="font-serif text-[clamp(26px,3.5vw,36px)] text-text leading-tight tracking-tight">
-                Empowering scholars through intentional design
-              </h2>
-              <p className="text-[15px] text-muted leading-relaxed">
-                ALearn was created to eliminate the universal friction in studying: spending hours organizing materials instead of mastering them. We bridge the gap between dense subjects and deep understanding.
+            <h2 className="font-serif text-[clamp(34px,4.8vw,56px)] text-text leading-[1.1] tracking-tight mb-8 font-normal">
+              Designed for understanding, not just studying.
+            </h2>
+            
+            <div className="space-y-5 text-[17px] lg:text-[18px] text-muted leading-[1.75] max-w-[56ch]">
+              <p>
+                Studying often becomes a process of collecting notes, organizing files, and rereading the same material—leaving less time for actually understanding it.
               </p>
+              <p className="text-text/90">
+                ALearn was built to make that process simpler. It turns learning materials into structured study experiences that help students move from reading information to actively working with it.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Three Principles (Pure Vertical Typographic Layout with Subtle Divider Rules) */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ ...smoothTransition, delay: 0.1 }}
+            className="mt-28 lg:mt-36 pt-16 border-t border-line/40"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
               
-              <div className="space-y-4 pt-2">
+              <div className="lg:col-span-4">
+                <span className="text-[11px] uppercase tracking-[0.2em] text-muted/60 font-medium block lg:sticky lg:top-28">
+                  Three Principles
+                </span>
+              </div>
+
+              <div className="lg:col-span-8 space-y-14">
                 {[
-                  { title: "Instant AI Synthesis", desc: "Convert subjects and terms into structured recall cards without manual entry." },
-                  { title: "Scientifically Proven Spacing", desc: "Reinforce long-term memory through structured active recall testing." },
-                  { title: "Zero Visual Noise", desc: "A restrained, calm interface designed to keep your attention on study material." }
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start space-x-3.5">
-                    <div className="p-1 rounded-[3px] bg-brass-soft text-brass mt-0.5 shrink-0">
-                      <CheckCircle2 className="w-4 h-4" />
+                  {
+                    num: "01",
+                    title: "Turn information into practice",
+                    body: "Instead of spending time manually creating study materials, ALearn transforms topics, notes, and learning content into structured recall cards that students can use to test their understanding."
+                  },
+                  {
+                    num: "02",
+                    title: "Review with intention",
+                    body: "Learning doesn't end after the first read. ALearn encourages repeated review and active recall, helping students revisit important concepts instead of relying solely on passive rereading."
+                  },
+                  {
+                    num: "03",
+                    title: "Keep the interface out of the way",
+                    body: "The interface is deliberately focused and restrained. Every element has a purpose, so the experience feels less like navigating a complicated application and more like sitting down to study."
+                  }
+                ].map((p, i) => (
+                  <div key={i} className={`pt-10 ${i > 0 ? 'border-t border-line/30' : ''}`}>
+                    <div className="flex items-baseline gap-4 mb-3">
+                      <span className="font-serif text-[15px] text-brass/90 font-medium tracking-wider">{p.num}</span>
+                      <h3 className="font-serif text-[24px] lg:text-[28px] text-text font-normal tracking-tight">{p.title}</h3>
                     </div>
-                    <div>
-                      <h4 className="text-[14px] font-semibold text-text">{item.title}</h4>
-                      <p className="text-[13px] text-muted leading-normal">{item.desc}</p>
-                    </div>
+                    <p className="text-[15px] text-muted leading-[1.7] max-w-[56ch] sm:pl-9">
+                      {p.body}
+                    </p>
                   </div>
                 ))}
               </div>
-            </motion.div>
-           
-            {/* Cognitive Science Card */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ ...smoothTransition, delay: 0.2 }}
-              className="lg:col-span-6 card-panel p-6 sm:p-8 space-y-6 ambient-shadow"
-            >
-              <div className="flex items-center justify-between pb-4 border-b border-line">
-                <div className="flex items-center space-x-2 text-[13px] font-semibold text-text">
-                  <BarChart3 className="w-4 h-4 text-brass" />
-                  <span>Cognitive Recall Efficiency</span>
-                </div>
-                <span className="text-[11px] text-muted font-medium">Memory Retention Study</span>
+
+            </div>
+          </motion.div>
+
+          {/* From Reading to Retrieval (Typographic Contrast Layout) */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ ...smoothTransition, delay: 0.2 }}
+            className="mt-28 lg:mt-36 pt-16 border-t border-line/40"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+              
+              <div className="lg:col-span-5 space-y-5">
+                <span className="text-[11px] uppercase tracking-[0.2em] text-brass font-medium block">
+                  Framework
+                </span>
+                <h3 className="font-serif text-[28px] lg:text-[34px] text-text font-normal tracking-tight leading-snug">
+                  From reading to retrieval
+                </h3>
+                <p className="text-[15px] text-muted leading-[1.75] max-w-[44ch]">
+                  ALearn is built around the idea that studying should involve more than simply looking at information. By turning material into questions and giving students opportunities to retrieve what they've learned, the experience becomes more interactive and deliberate.
+                </p>
               </div>
 
-              <div className="space-y-4 text-[13px]">
-                <div>
-                  <div className="flex justify-between font-medium mb-1.5 text-muted">
-                    <span>Passive Rereading</span>
-                    <span>~15% Retention</span>
+              <div className="lg:col-span-7 flex flex-col sm:flex-row gap-10 sm:gap-16 items-start pt-2">
+                
+                {/* Passive Review Column */}
+                <div className="space-y-6 flex-1 opacity-60">
+                  <div className="text-[11px] uppercase tracking-[0.2em] text-muted font-medium pb-3 border-b border-line/30">
+                    Passive Review
                   </div>
-                  <div className="w-full h-2 rounded-full bg-white/5 overflow-hidden">
-                    <div className="h-full bg-muted/50 rounded-full w-[15%]" />
-                  </div>
+                  <ul className="space-y-4 font-serif text-[22px] text-muted leading-tight tracking-tight">
+                    <li>Read</li>
+                    <li className="text-muted/60">Recognize</li>
+                    <li className="text-muted/40">Move on</li>
+                  </ul>
                 </div>
 
-                <div>
-                  <div className="flex justify-between font-medium mb-1.5 text-brass">
-                    <span>Active Recall + AI Decks (ALearn)</span>
-                    <span className="font-semibold">~92% Retention</span>
+                {/* Subtle Vertical Divider */}
+                <div className="hidden sm:block w-px h-52 bg-line/30 self-stretch" />
+
+                {/* Active Recall Column */}
+                <div className="space-y-6 flex-1">
+                  <div className="text-[11px] uppercase tracking-[0.2em] text-brass font-semibold pb-3 border-b border-brass/50">
+                    Active Recall
                   </div>
-                  <div className="w-full h-2 rounded-full bg-white/5 overflow-hidden">
-                    <div className="h-full bg-brass rounded-full w-[92%]" />
-                  </div>
+                  <ul className="space-y-4 font-serif text-[26px] lg:text-[28px] text-text font-medium leading-tight tracking-tight">
+                    <li className="text-brass">Question</li>
+                    <li className="text-text">Retrieve</li>
+                    <li className="text-text">Check</li>
+                    <li className="text-brass">Reinforce</li>
+                  </ul>
                 </div>
+
               </div>
 
-              <p className="text-[13px] text-muted pt-2 border-t border-line leading-relaxed">
-                Active testing forces memory retrieval, building stronger neural pathways than passive highlights or re-reading text.
-              </p>
-            </motion.div>
+            </div>
+          </motion.div>
 
-          </div>
         </div>
       </section>
 

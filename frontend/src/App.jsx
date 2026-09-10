@@ -19,23 +19,23 @@ function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
-        <div className="min-h-screen bg-surface font-sans transition-colors duration-200 overflow-x-hidden relative">
+        <div className="min-h-screen bg-ink text-text font-sans overflow-x-hidden relative">
           <Toaster position="top-center" reverseOrder={false} />
           {isLoading && <LoadingOverlay />}
-        <Navbar />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/selection" element={<ProtectedRoute><Selection /></ProtectedRoute>} />
-            <Route path="/manual" element={<ProtectedRoute><Manual /></ProtectedRoute>} />
-            <Route path="/ai-generator" element={<ProtectedRoute><AIGenerator /></ProtectedRoute>} />
-            <Route path="/quiz" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </main>
-      </div>
-    </BrowserRouter>
+          <Navbar />
+          <main className="w-full pt-16">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+              <Route path="/selection" element={<ProtectedRoute><Selection /></ProtectedRoute>} />
+              <Route path="/manual" element={<ProtectedRoute><Manual /></ProtectedRoute>} />
+              <Route path="/ai-generator" element={<ProtectedRoute><AIGenerator /></ProtectedRoute>} />
+              <Route path="/quiz" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </main>
+        </div>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

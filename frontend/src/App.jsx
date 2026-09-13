@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
@@ -6,6 +6,7 @@ import Manual from './pages/Manual';
 import AIGenerator from './pages/AIGenerator';
 import Quiz from './pages/Quiz';
 import Selection from './pages/Selection';
+import NotFound from './pages/NotFound';
 import ProtectedRoute from './components/ProtectedRoute';
 import LoadingOverlay from './components/LoadingOverlay';
 import { useAuth } from './context/AuthContext';
@@ -31,7 +32,7 @@ function App() {
               <Route path="/manual" element={<ProtectedRoute><Manual /></ProtectedRoute>} />
               <Route path="/ai-generator" element={<ProtectedRoute><AIGenerator /></ProtectedRoute>} />
               <Route path="/quiz" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
-              <Route path="*" element={<Navigate to="/" replace />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
         </div>
